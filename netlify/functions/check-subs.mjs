@@ -31,7 +31,7 @@ async function fetchStats() {
 
 export default async () => {
   const mode = process.env.NOTIFY_MODE || "milestone"; // "milestone" | "everyChange"
-  const store = getStore("kabusx-state");
+  const store = getStore({ name: "kabusx-state", consistency: "strong" });
 
   let subs, name;
   try {
@@ -50,6 +50,8 @@ export default async () => {
 
   const lastRaw = await store.get("last");
   const last = lastRaw === null ? null : Number(lastRaw);
+  console.log(`YouTube: ${subs} | əvvəlki: ${last} | rejim: ${mode}`);
+  if (process.env.DEBUG_TG === "1") await sendTelegram(`🔍 YouTube: ${subs} | əvvəlki: ${last} | rejim: ${mode}`);
 
   if (last === null) {
     await sendTelegram(`✅ ${name}: izləmə başladı (${fmt(subs)} abunəçi)`);
