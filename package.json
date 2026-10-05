@@ -1,0 +1,9 @@
+{
+  "name": "kabusx-sub-bot",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0",
+    "@netlify/functions": "^2.8.0"
+  }
+}
